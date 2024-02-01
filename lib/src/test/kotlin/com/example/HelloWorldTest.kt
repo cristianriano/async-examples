@@ -1,6 +1,6 @@
 package com.example
 
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class HelloWorldTest {
@@ -8,6 +8,6 @@ class HelloWorldTest {
   @Test
   fun someLibraryMethodReturnsTrue() {
     val classUnderTest = HelloWorld()
-    assertTrue(classUnderTest.someLibraryMethod())
+    assertThat(classUnderTest.someLibraryMethod()).isTrue()
   }
 }
