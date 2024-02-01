@@ -17,6 +17,10 @@ dependencies {
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+tasks.named<Test>("test") {
+  useJUnitPlatform()
+}
+
 // Kotlin doesn't support JVM 21 yet
 tasks.withType<KotlinCompile> {
   kotlinOptions {
