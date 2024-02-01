@@ -8,6 +8,7 @@ spotless = "6.25.0"
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit-bom" }
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+spotless = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 
 # Plugins must be referenced by id and by alias in the build.gradle
 [plugins]
