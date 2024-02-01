@@ -1,12 +1,13 @@
-package hello.world
+package com.example
 
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class LibraryTest {
+class HelloWorldTest {
+  
   @Test
   fun someLibraryMethodReturnsTrue() {
-    val classUnderTest = Library()
+    val classUnderTest = HelloWorld()
     assertTrue(classUnderTest.someLibraryMethod())
   }
 }
