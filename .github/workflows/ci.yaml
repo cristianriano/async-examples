@@ -9,6 +9,7 @@ defaults:
 jobs:
   checks:
     name: CI
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
