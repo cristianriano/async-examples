@@ -1,0 +1,31 @@
+name: Build and test lib
+
+on: pull_request
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  checks:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 'Setup JDK'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Compile
+        run: ./gradlew --stacktrace classes
+
+      - name: Tests
+        run: ./gradlew --stacktrace test
