@@ -1,7 +1,7 @@
 package com.example
 
 class HelloWorld {
-    fun someLibraryMethod(): Boolean {
-        return true
-    }
+  fun someLibraryMethod(): Boolean {
+    return true
+  }
 }
