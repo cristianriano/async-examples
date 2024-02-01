@@ -17,6 +17,7 @@ dependencies {
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+// Kotlin doesn't support JVM 21 yet
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     jvmTarget = "17"
