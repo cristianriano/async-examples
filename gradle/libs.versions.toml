@@ -1,0 +1,12 @@
+[versions]
+assertj = "3.25.1"
+junit-bom = "5.9.3"
+kotlin = "1.9.0"
+
+[libraries]
+assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit-bom" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+
+[plugins]
+kotlin-gradle = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

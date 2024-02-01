@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   // Need to specify version unless it comes from buildSrc lib
-  kotlin("jvm") version "1.9.0"
+  alias(libs.plugins.kotlin.gradle)
 
   `java-library`
 }
@@ -12,8 +12,11 @@ repositories {
 }
 
 dependencies {
-  testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
-  testImplementation("org.assertj:assertj-core:3.25.1")
+  api(platform(libs.kotlin.bom))
+
+  testImplementation(platform(libs.junit.bom))
+  testImplementation(libs.assertj)
+  testImplementation("org.junit.jupiter:junit-jupiter-engine")
 
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
