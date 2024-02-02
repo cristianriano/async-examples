@@ -16,6 +16,8 @@ repositories {
 dependencies {
   api(platform(libs.kotlin.bom))
 
+  implementation(libs.kotlin.coroutines.core)
+
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.assertj)
   testImplementation("org.junit.jupiter:junit-jupiter-engine")
