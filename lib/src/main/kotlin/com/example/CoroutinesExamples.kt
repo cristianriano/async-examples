@@ -2,8 +2,9 @@ package com.example
 
 import kotlinx.coroutines.*
 import java.lang.RuntimeException
+import java.util.concurrent.ExecutorService
 
-class CoroutinesExamples {
+class CoroutinesExamples(private val executor: ExecutorService) {
 
   fun usingRunBlocking(): Unit {
     runBlocking {
@@ -44,6 +45,11 @@ class CoroutinesExamples {
 
     Thread.sleep(2_000)
     return res
+  }
+
+  fun fireAndForget() {
+    executor.submit { runBlocking { printN(1) } }
+    println("Fired!")
   }
 
   private suspend fun printN(n: Long): Long {
