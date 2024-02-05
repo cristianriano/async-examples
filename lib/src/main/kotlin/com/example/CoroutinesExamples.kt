@@ -1,8 +1,8 @@
 package com.example
 
-import kotlinx.coroutines.*
 import java.lang.RuntimeException
 import java.util.concurrent.ExecutorService
+import kotlinx.coroutines.*
 
 class CoroutinesExamples(private val executor: ExecutorService) {
 
@@ -25,16 +25,13 @@ class CoroutinesExamples(private val executor: ExecutorService) {
       val defer2: Deferred<Long> = async { printN(2) }
       val defer3: Deferred<Long> = async { printN(3) }
 
-      println(
-        defer1.await() + defer2.await() + defer3.await()
-      )
+      println(defer1.await() + defer2.await() + defer3.await())
     }
   }
 
   fun cancelAfterOneFailure(): Result<String> {
     val res: Result<String> = runCatching {
       runBlocking {
-
         launch { printN(1) }
         launch { printN(2) }
         launch { waitAndFail() }
@@ -43,7 +40,7 @@ class CoroutinesExamples(private val executor: ExecutorService) {
       }
     }
 
-    Thread.sleep(2_000)
+    Thread.sleep(1_200)
     return res
   }
 
@@ -53,13 +50,13 @@ class CoroutinesExamples(private val executor: ExecutorService) {
   }
 
   private suspend fun printN(n: Long): Long {
-    delay(2_000)
+    delay(1_000)
     println(n)
     return n
   }
 
   private suspend fun waitAndFail() {
-    delay(1000)
+    delay(500)
     throw RuntimeException("Boom")
   }
 }
