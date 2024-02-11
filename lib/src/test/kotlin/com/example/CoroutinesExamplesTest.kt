@@ -1,8 +1,8 @@
 package com.example
 
+import java.util.concurrent.Executors
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.concurrent.Executors
 
 class CoroutinesExamplesTest {
 
