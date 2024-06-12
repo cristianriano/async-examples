@@ -1,27 +1,16 @@
 package com.example
 
 class Solution {
-  fun maxRepeating(sequence: String, word: String): Int {
-    val wordSize = word.length
+  fun containsPattern(arr: IntArray, m: Int, k: Int): Boolean {
+    val n = arr.size
+    var count = 0
+    for (i in 0..n-1-m) {
+      if (arr[i] == arr[i+m]) count++
+      else count = 0
 
-    var maxRepeating = 0
-    for (i in 0..sequence.length) {
-      var repeats = 0
-      var index = i
-      while (sequence.safeSubsequence(index, index + wordSize) == word) {
-        index+= wordSize
-        repeats++
-      }
-
-      if (repeats > maxRepeating) {
-        maxRepeating = repeats
-      }
+      if (count == m * (k-1)) return true
     }
 
-    return maxRepeating
+    return false
   }
 }
-
-private fun String.safeSubsequence(start: Int, end: Int): CharSequence = runCatching {
-  this.subSequence(start, end)
-}.getOrElse { "" }

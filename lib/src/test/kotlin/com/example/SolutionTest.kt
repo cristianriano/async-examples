@@ -13,15 +13,18 @@ class SolutionTest {
 
   @ParameterizedTest
   @MethodSource("params")
-  fun `when sequence is repeated`(sequence: String, word: String, maxRepetitions: Int) {
-    assertThat(solution.maxRepeating(sequence, word)).isEqualTo(maxRepetitions)
+  fun `containsPattern`(arr: IntArray, m: Int, k: Int, contains: Boolean) {
+    assertThat(solution.containsPattern(arr, m, k)).isEqualTo(contains)
   }
 
   companion object {
 
     @JvmStatic
     fun params() = sequenceOf(
-      Arguments.of("ababc", "ab", 2)
+      Arguments.of(intArrayOf(1,2,4,4,4,4), 1, 3, true),
+      Arguments.of(intArrayOf(1,2,1,2,1,3), 2, 3, false),
+      Arguments.of(intArrayOf(99,9), 1, 3, false),
+      Arguments.of(intArrayOf(1,2,1,2,4,1,2), 2, 3, false),
     ).asStream()
   }
 }
