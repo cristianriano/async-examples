@@ -20,8 +20,8 @@ dependencies {
 
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.assertj)
-  testImplementation("org.junit.jupiter:junit-jupiter-engine")
   testImplementation("org.junit.jupiter:junit-jupiter-params")
+  testImplementation("org.junit.jupiter:junit-jupiter-engine")
 
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
