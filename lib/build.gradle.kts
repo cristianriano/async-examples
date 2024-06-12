@@ -21,6 +21,7 @@ dependencies {
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.assertj)
   testImplementation("org.junit.jupiter:junit-jupiter-engine")
+  testImplementation("org.junit.jupiter:junit-jupiter-params")
 
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

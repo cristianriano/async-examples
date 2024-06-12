@@ -1,7 +1,7 @@
 package com.example
 
 class HelloWorld {
-  fun someLibraryMethod(): Boolean {
-    return true
+  fun greet(name: String): String {
+    return "Hello $name"
   }
 }
