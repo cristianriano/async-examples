@@ -35,4 +35,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.changeBills(230.0, 500.0)).isEqualTo("Fifty, One Hundred, One Hundred, Twenty")
   }
+
+  @Test
+  fun `change bills cents`() {
+    val x = Solution()
+    assertThat(x.changeBills(15.94, 16.0)).isEqualTo("Nickel, Penny")
+  }
 }

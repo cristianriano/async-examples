@@ -63,7 +63,6 @@ class Solution {
   }
 
   companion object {
-//    (100,50,20,10,5,2,1,0.5,0.25,0.1,0.05,0.01)
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),
       FIFTY(50.0, "Fifty"),
@@ -71,7 +70,12 @@ class Solution {
       TEN(10.0, "Ten"),
       FIVE(5.0, "Five"),
       TWO(2.0, "Two"),
-      ONE(1.0, "One")
+      ONE(1.0, "One"),
+      HALF(0.5, "Half"),
+      QUARTER(0.25, "Quarter"),
+      DIME(0.1, "Dime"),
+      NICKEL(0.05, "Nickel"),
+      PENNY(0.01, "Penny"),
     }
   }
 }
