@@ -95,6 +95,49 @@ class Solution {
     else return findIndex(nums, mid + 1, end, target)
   }
 
+  fun numIslands(grid: Array<CharArray>): Int {
+    val visited = mutableSetOf<Coordinate>()
+    var islands = 0
+
+    for (i in 0..(grid.size-1)) {
+      for (j in 0..(grid[i].size-1)) {
+        val current = Coordinate(i, j)
+        if (visited.contains(current)) continue
+        visited.add(current)
+
+        val isLand = grid[i][j] == '1'
+        if (!isLand) continue
+
+        visitIsland(grid, i, j, visited)
+        islands++
+      }
+    }
+
+    return islands
+  }
+
+  private fun visitIsland(grid: Array<CharArray>, i: Int, j: Int, visited: MutableSet<Coordinate>) {
+    val stack = ArrayDeque<Coordinate>()
+    stack.addFirst(Coordinate(i, j))
+
+    while (!stack.isEmpty()) {
+      val current = stack.removeFirst()
+      if (visited.contains(current)) continue
+      visited.add(current)
+
+      val isLand = grid[current.x][current.y] == '1'
+
+      if (!isLand) continue
+
+      if (current.x + 1 < grid.size) stack.addFirst(Coordinate(current.x+1, current.y))
+      if (current.x > 0) stack.addFirst(Coordinate(current.x-1, current.y))
+      if (current.y + 1 < grid[i].size) stack.addFirst(Coordinate(current.x, current.y+1))
+      if (current.y > 0) stack.addFirst(Coordinate(current.x, current.y-1))
+    }
+  }
+
+  private data class Coordinate(val x: Int, val y: Int)
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),
