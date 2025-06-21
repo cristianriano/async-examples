@@ -23,4 +23,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.twoSumHash(intArrayOf(2, 7, 11, 15), 9)).containsExactlyInAnyOrder(0, 1)
   }
+
+  @Test
+  fun `binary sum`() {
+    val x = Solution()
+    assertThat(x.sumBinaries("1001", "0010")).isEqualTo("1011")
+  }
 }

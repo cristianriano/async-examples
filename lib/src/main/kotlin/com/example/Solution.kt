@@ -42,4 +42,8 @@ class Solution {
 
     return IntArray(2)
   }
+
+  fun sumBinaries(x: String, y: String): String {
+    return Integer.toBinaryString(x.toInt(2) + y.toInt(2))
+  }
 }
