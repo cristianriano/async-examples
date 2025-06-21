@@ -62,6 +62,39 @@ class Solution {
     return bills.joinToString()
   }
 
+  fun searchRange(nums: IntArray, target: Int): IntArray {
+    val index = findIndex(nums, 0, nums.size - 1, target)
+
+    if (index == -1) return intArrayOf(-1, -1)
+
+    var (begin, end, cursor) = listOf(index, index, index)
+
+    while (nums[cursor] == target) {
+      begin = cursor
+      if (cursor == 0) break
+      cursor--
+    }
+
+    cursor = index
+    while (nums[cursor] == target) {
+      end = cursor
+      cursor++
+      if (cursor == nums.size) break
+    }
+
+    return intArrayOf(begin, end)
+  }
+
+  private fun findIndex(nums: IntArray, begin: Int, end: Int, target: Int): Int {
+    if (begin > end) return -1
+
+    val mid = begin + ((end - begin) / 2)
+
+    return if (target == nums[mid]) mid
+    else if (nums[mid] > target) return findIndex(nums, begin, mid - 1, target)
+    else return findIndex(nums, mid + 1, end, target)
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),

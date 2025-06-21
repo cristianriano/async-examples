@@ -41,4 +41,28 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.changeBills(15.94, 16.0)).isEqualTo("Nickel, Penny")
   }
+
+  @Test
+  fun `search range`() {
+    val x = Solution()
+    assertThat(x.searchRange(intArrayOf(5,7,7,8,8,10), 8)).isEqualTo(intArrayOf(3, 4))
+  }
+
+  @Test
+  fun `search range when not exists`() {
+    val x = Solution()
+    assertThat(x.searchRange(intArrayOf(5,7,7,8,8,10), 6)).isEqualTo(intArrayOf(-1, -1))
+  }
+
+  @Test
+  fun `search range at the end`() {
+    val x = Solution()
+    assertThat(x.searchRange(intArrayOf(5,7,7,8,8,10,10), 10)).isEqualTo(intArrayOf(5, 6))
+  }
+
+  @Test
+  fun `search range at the beginning`() {
+    val x = Solution()
+    assertThat(x.searchRange(intArrayOf(5,7,7,8,8,10,10), 5)).isEqualTo(intArrayOf(0, 0))
+  }
 }
