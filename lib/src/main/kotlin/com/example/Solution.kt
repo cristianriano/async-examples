@@ -16,4 +16,30 @@ class Solution {
 
     return result
   }
+
+  fun twoSum(nums: IntArray, target: Int): IntArray {
+    val size = nums.size - 1
+    for (i in 0..size) {
+      for (j in i+1..size) {
+        if (nums[i] + nums[j] == target) {
+          return intArrayOf(i, j)
+        }
+      }
+    }
+
+    return IntArray(2)
+  }
+
+  fun twoSumHash(nums: IntArray, target: Int): IntArray {
+    val hash = mutableMapOf<Int, Int>()
+    for ((i, v) in nums.withIndex()) {
+      val complement = target - v
+      if (hash.contains(complement)) {
+        return intArrayOf(i, hash.getOrDefault(complement, -1))
+      }
+      hash[v] = i
+    }
+
+    return IntArray(2)
+  }
 }
