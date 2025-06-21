@@ -46,4 +46,32 @@ class Solution {
   fun sumBinaries(x: String, y: String): String {
     return Integer.toBinaryString(x.toInt(2) + y.toInt(2))
   }
+
+  fun changeBills(price: Double, cash: Double): String {
+    var change = cash - price
+    val bills = mutableListOf<String>()
+
+    for (current in Bill.entries) {
+      while (change >= current.value) {
+        bills.add(current.text)
+        change -= current.value
+      }
+    }
+
+    bills.sort()
+    return bills.joinToString()
+  }
+
+  companion object {
+//    (100,50,20,10,5,2,1,0.5,0.25,0.1,0.05,0.01)
+    enum class Bill(val value: Double, val text: String) {
+      HUNDRED(100.0, "One Hundred"),
+      FIFTY(50.0, "Fifty"),
+      TWENTY(20.0, "Twenty"),
+      TEN(10.0, "Ten"),
+      FIVE(5.0, "Five"),
+      TWO(2.0, "Two"),
+      ONE(1.0, "One")
+    }
+  }
 }

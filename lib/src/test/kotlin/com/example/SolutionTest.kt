@@ -29,4 +29,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.sumBinaries("1001", "0010")).isEqualTo("1011")
   }
+
+  @Test
+  fun `change bills`() {
+    val x = Solution()
+    assertThat(x.changeBills(230.0, 500.0)).isEqualTo("Fifty, One Hundred, One Hundred, Twenty")
+  }
 }
