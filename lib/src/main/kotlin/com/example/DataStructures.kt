@@ -1,5 +1,7 @@
 package com.example
 
+import java.util.PriorityQueue
+
 interface SortedStack<T : Comparable<T>> {
   fun peek(): T
   fun pop(): T
@@ -40,6 +42,28 @@ class IncreasingStack<T : Comparable<T>> : SortedStack<T> {
   override fun isEmpty() = actual.isEmpty()
 
   override fun size() = actual.size
+}
+
+class MinHeap(val capacity: Int): Heap {
+  private val queue = PriorityQueue<Int>(capacity)
+
+  override fun add(element: Int) {
+    queue.add(element)
+  }
+
+  override fun poll(): Int {
+    if (isEmpty()) throw IllegalArgumentException()
+
+    return queue.poll()!!
+  }
+
+  override fun peek(): Int {
+    if (isEmpty()) throw IllegalArgumentException()
+
+    return queue.peek()!!
+  }
+
+  override fun isEmpty() = queue.isEmpty()
 }
 
 class MaxHeap(val capacity: Int) : Heap {
