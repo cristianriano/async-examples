@@ -232,21 +232,20 @@ class Solution {
   // Leetcode 739
   fun dailyTemperatures(temperatures: IntArray): IntArray {
     val response = IntArray(temperatures.size)
-    val stack = IncreasingStack<DayTemperature>()
+    val stack = ArrayDeque<Int>()
 
     for ((i, temp) in temperatures.withIndex()) {
-      val current = DayTemperature(i, temp)
-
       if (stack.isEmpty()) {
-        stack.push(current)
+        stack.addFirst(i)
         continue
       }
 
-      while (!stack.isEmpty() && temp > stack.peek().temp) {
-        val top = stack.pop()
-        response[top.day] = i - top.day
+      while (!stack.isEmpty() && temp > temperatures[stack.first()]) {
+        val topOfStack = stack.removeFirst()
+        response[topOfStack] = i - topOfStack
       }
-      stack.push(current)
+
+      stack.addFirst(i)
     }
 
     return response
