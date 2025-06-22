@@ -150,6 +150,8 @@ class Solution {
     }
   }
 
+  private data class Coordinate(val x: Int, val y: Int)
+
   fun maxArea(height: IntArray): Int {
     var max = 0
     var i = 0
@@ -227,7 +229,15 @@ class Solution {
     return substring
   }
 
-  private data class Coordinate(val x: Int, val y: Int)
+  // Leetcode 739
+  fun dailyTemperatures(temperatures: IntArray): IntArray {
+    // Input: temperatures = [73,74,75,71,69,72,76,73]
+    // Output: [1,1,4,2,1,1,0,0]
+    val response = IntArray(temperatures.size)
+
+
+    return response
+  }
 
   companion object {
     enum class Bill(val value: Double, val text: String) {

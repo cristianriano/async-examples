@@ -125,4 +125,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.minWindow("A", "AA")).isEqualTo("")
   }
+
+  @Test
+  fun dailyTemperatures() {
+    val x = Solution()
+    assertThat(x.dailyTemperatures(intArrayOf(73,74,75,71,69,72,76,73))).isEqualTo(intArrayOf(1,1,4,2,1,1,0,0))
+  }
 }
