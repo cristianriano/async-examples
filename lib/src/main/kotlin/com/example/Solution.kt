@@ -231,12 +231,31 @@ class Solution {
 
   // Leetcode 739
   fun dailyTemperatures(temperatures: IntArray): IntArray {
-    // Input: temperatures = [73,74,75,71,69,72,76,73]
-    // Output: [1,1,4,2,1,1,0,0]
     val response = IntArray(temperatures.size)
+    val stack = IncreasingStack<DayTemperature>()
 
+    for ((i, temp) in temperatures.withIndex()) {
+      val current = DayTemperature(i, temp)
+
+      if (stack.isEmpty()) {
+        stack.push(current)
+        continue
+      }
+
+      while (!stack.isEmpty() && temp > stack.peek().temp) {
+        val top = stack.pop()
+        response[top.day] = i - top.day
+      }
+      stack.push(current)
+    }
 
     return response
+  }
+
+  private data class DayTemperature(val day: Int, val temp: Int) : Comparable<DayTemperature> {
+    override fun compareTo(other: DayTemperature): Int {
+      return temp - other.temp
+    }
   }
 
   companion object {
