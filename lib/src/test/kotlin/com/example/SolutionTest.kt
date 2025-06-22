@@ -83,4 +83,16 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.subarraySum(intArrayOf(1), 0)).isEqualTo(0)
   }
+
+  @Test
+  fun maxArea() {
+    val x = Solution()
+    assertThat(x.maxArea(intArrayOf(1,8,6,2,5,4,8,3,7))).isEqualTo(49)
+  }
+
+  @Test
+  fun `maxArea in the middle`() {
+    val x = Solution()
+    assertThat(x.maxArea(intArrayOf(1,8,6,2,1000,1000,8,3,7))).isEqualTo(1000)
+  }
 }

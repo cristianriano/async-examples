@@ -150,6 +150,25 @@ class Solution {
     }
   }
 
+  fun maxArea(height: IntArray): Int {
+    var max = 0
+    var i = 0
+    var j = height.size - 1
+
+    while (i < j) {
+      var area = (j - i) * Math.min(height[i], height[j])
+
+      if (max < area) {
+        max = area
+      }
+
+      if (height[i] > height[j]) j--
+      else i++
+    }
+
+    return max
+  }
+
   private data class Coordinate(val x: Int, val y: Int)
 
   companion object {
