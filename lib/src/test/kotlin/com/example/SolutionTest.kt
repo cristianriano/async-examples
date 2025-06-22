@@ -77,4 +77,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.subarraySum(intArrayOf(1,2,3), 3)).isEqualTo(2)
   }
+
+  @Test
+  fun `subarray sums K edge case`() {
+    val x = Solution()
+    assertThat(x.subarraySum(intArrayOf(1), 0)).isEqualTo(0)
+  }
 }

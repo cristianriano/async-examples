@@ -117,21 +117,14 @@ class Solution {
   }
 
   fun subarraySum(nums: IntArray, k: Int): Int {
-    var (sums, prefix) = listOf(0,0)
+    var sums = 0
+    var prefix = 0
+    val prefixSumFreq = mutableMapOf(0 to 1)
 
-    for (i in 0..(nums.size - 1)) {
-      prefix += nums[i]
-      nums[i] = prefix
-
-      if (nums[i] == k) {
-        sums++
-      }
-
-      for (j in i-1 downTo 0) {
-        if (nums[i] - nums[j] == k) {
-          sums++
-        }
-      }
+    for (n in nums) {
+      prefix += n
+      sums += prefixSumFreq.getOrDefault(prefix - k, 0)
+      prefixSumFreq[prefix] = prefixSumFreq.getOrDefault(prefix, 0) + 1
     }
 
     return sums
