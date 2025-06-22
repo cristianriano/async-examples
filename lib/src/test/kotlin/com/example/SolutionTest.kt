@@ -65,4 +65,16 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.searchRange(intArrayOf(5,7,7,8,8,10,10), 5)).isEqualTo(intArrayOf(0, 0))
   }
+
+  @Test
+  fun `subarray sums K`() {
+    val x = Solution()
+    assertThat(x.subarraySum(intArrayOf(1,1,1), 2)).isEqualTo(2)
+  }
+
+  @Test
+  fun `subarray sums K again`() {
+    val x = Solution()
+    assertThat(x.subarraySum(intArrayOf(1,2,3), 3)).isEqualTo(2)
+  }
 }

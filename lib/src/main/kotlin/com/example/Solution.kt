@@ -116,6 +116,30 @@ class Solution {
     return islands
   }
 
+  fun subarraySum(nums: IntArray, k: Int): Int {
+    val prefixSum = IntArray(nums.size)
+    var sum = 0
+    for((i, n) in nums.withIndex()) {
+      sum += n
+      prefixSum[i] = sum
+    }
+
+    var sums = 0
+    for (i in 0..(prefixSum.size - 1)) {
+      if (prefixSum[i] == k) {
+        sums++
+      }
+
+      for (j in i-1 downTo 0) {
+        if (prefixSum[i] - prefixSum[j] == k) {
+          sums++
+        }
+      }
+    }
+
+    return sums
+  }
+
   private fun visitIsland(grid: Array<CharArray>, i: Int, j: Int, visited: MutableSet<Coordinate>) {
     val stack = ArrayDeque<Coordinate>()
     stack.addFirst(Coordinate(i, j))
