@@ -95,4 +95,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.maxArea(intArrayOf(1,8,6,2,1000,1000,8,3,7))).isEqualTo(1000)
   }
+
+  @Test
+  fun maxAvg() {
+    val x = Solution()
+    assertThat(x.findMaxAverage(intArrayOf(1,12,-5,-6,50,3), 4)).isEqualTo(12.75)
+  }
 }

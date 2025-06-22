@@ -169,6 +169,29 @@ class Solution {
     return max
   }
 
+  fun findMaxAverage(nums: IntArray, k: Int): Double {
+    var sum = 0.0
+
+    for (i in 0..(k - 1)) {
+      sum += nums[i]
+    }
+    var maxAvg = sum / k
+
+    var j = 0
+    for (i in k..(nums.size - 1)) {
+      sum += nums[i]
+      sum -= nums[j]
+
+      if ((sum / k) > maxAvg) {
+        maxAvg = sum / k
+      }
+
+      j++
+    }
+
+    return maxAvg
+  }
+
   private data class Coordinate(val x: Int, val y: Int)
 
   companion object {
