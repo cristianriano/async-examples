@@ -3,7 +3,7 @@ package com.example
 import java.util.PriorityQueue
 
 class Solution {
-  fun solution(numbers: MutableList<Int>): MutableList<Int> {
+  fun zigzag(numbers: MutableList<Int>): MutableList<Int> {
     val result = mutableListOf<Int>()
 
     for (i in 0..(numbers.size-3)) {
@@ -19,6 +19,7 @@ class Solution {
     return result
   }
 
+  // Leetcode 1
   fun twoSum(nums: IntArray, target: Int): IntArray {
     val size = nums.size - 1
     for (i in 0..size) {
@@ -32,6 +33,7 @@ class Solution {
     return IntArray(2)
   }
 
+  // Leetcode 1
   fun twoSumHash(nums: IntArray, target: Int): IntArray {
     val hash = mutableMapOf<Int, Int>()
     for ((i, v) in nums.withIndex()) {
@@ -45,10 +47,16 @@ class Solution {
     return IntArray(2)
   }
 
+  // Given 2 non-negative integers in a binary representation as a string -
+  // return sum of them in a binary representation and discard intial zeros (if any)
   fun sumBinaries(x: String, y: String): String {
     return Integer.toBinaryString(x.toInt(2) + y.toInt(2))
   }
 
+  // Given 2 non-negative double numbers first representing price of product (pp)
+  // bought by customer and second representing cash given by customer.
+  // Cashier has (100,50,20,10,5,2,1,0.5,0.25,0.1,0.05,0.01) as bills.
+  // Return bills returned to customer as a comma separated string. String has to be alphabetically sorted.
   fun changeBills(price: Double, cash: Double): String {
     var change = cash - price
     val bills = mutableListOf<String>()
@@ -64,6 +72,7 @@ class Solution {
     return bills.joinToString()
   }
 
+  // Leetcode 34
   fun searchRange(nums: IntArray, target: Int): IntArray {
     val index = findIndex(nums, 0, nums.size - 1, target)
 
@@ -97,6 +106,7 @@ class Solution {
     else return findIndex(nums, mid + 1, end, target)
   }
 
+  // Leetcode 200
   fun numIslands(grid: Array<CharArray>): Int {
     val visited = mutableSetOf<Coordinate>()
     var islands = 0
@@ -116,20 +126,6 @@ class Solution {
     }
 
     return islands
-  }
-
-  fun subarraySum(nums: IntArray, k: Int): Int {
-    var sums = 0
-    var prefix = 0
-    val prefixSumFreq = mutableMapOf(0 to 1)
-
-    for (n in nums) {
-      prefix += n
-      sums += prefixSumFreq.getOrDefault(prefix - k, 0)
-      prefixSumFreq[prefix] = prefixSumFreq.getOrDefault(prefix, 0) + 1
-    }
-
-    return sums
   }
 
   private fun visitIsland(grid: Array<CharArray>, i: Int, j: Int, visited: MutableSet<Coordinate>) {
@@ -154,6 +150,22 @@ class Solution {
 
   private data class Coordinate(val x: Int, val y: Int)
 
+  // Leetcode 560
+  fun subarraySum(nums: IntArray, k: Int): Int {
+    var sums = 0
+    var prefix = 0
+    val prefixSumFreq = mutableMapOf(0 to 1)
+
+    for (n in nums) {
+      prefix += n
+      sums += prefixSumFreq.getOrDefault(prefix - k, 0)
+      prefixSumFreq[prefix] = prefixSumFreq.getOrDefault(prefix, 0) + 1
+    }
+
+    return sums
+  }
+
+  // Leetcode 11
   fun maxArea(height: IntArray): Int {
     var max = 0
     var i = 0
@@ -173,6 +185,7 @@ class Solution {
     return max
   }
 
+  // Leetcode 643
   fun findMaxAverage(nums: IntArray, k: Int): Double {
     var sum = 0.0
 
@@ -196,6 +209,7 @@ class Solution {
     return maxAvg
   }
 
+  // Leetcode 76
   fun minWindow(s: String, t: String): String {
     val frequencies = mutableMapOf<Char, Int>()
     t.forEach { frequencies[it] = frequencies.getOrDefault(it, 0) + 1 }
