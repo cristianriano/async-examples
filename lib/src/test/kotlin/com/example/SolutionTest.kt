@@ -131,4 +131,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.dailyTemperatures(intArrayOf(73,74,75,71,69,72,76,73))).isEqualTo(intArrayOf(1,1,4,2,1,1,0,0))
   }
+
+  @Test
+  fun findKthLargest() {
+    val x = Solution()
+    assertThat(x.findKthLargest(intArrayOf(3,2,1,5,6,4), 2)).isEqualTo(5)
+  }
 }

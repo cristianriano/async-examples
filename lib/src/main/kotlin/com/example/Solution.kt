@@ -1,5 +1,7 @@
 package com.example
 
+import java.util.PriorityQueue
+
 class Solution {
   fun solution(numbers: MutableList<Int>): MutableList<Int> {
     val result = mutableListOf<Int>()
@@ -255,6 +257,21 @@ class Solution {
     override fun compareTo(other: DayTemperature): Int {
       return temp - other.temp
     }
+  }
+
+  // Leetcode 215
+  fun findKthLargest(nums: IntArray, k: Int): Int {
+    val heap = PriorityQueue(nums.size, Comparator<Int> { o1, o2 -> o2 - o1 })
+
+    for (i in nums) {
+      heap.add(i)
+    }
+
+    for (i in 1..k-1) {
+      heap.poll()
+    }
+
+    return heap.poll()
   }
 
   companion object {
