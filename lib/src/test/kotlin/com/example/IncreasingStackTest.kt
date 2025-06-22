@@ -3,7 +3,7 @@ package com.example
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DataStructuresTest {
+class IncreasingStackTest {
 
   @Test
   fun `when stack is empty`() {

@@ -8,6 +8,13 @@ interface SortedStack<T : Comparable<T>> {
   fun size(): Int
 }
 
+interface Heap {
+  fun add(element: Int): Unit
+  fun poll(): Int
+  fun peek(): Int
+  fun isEmpty(): Boolean
+}
+
 class IncreasingStack<T : Comparable<T>> : SortedStack<T> {
   private val tmp = ArrayDeque<T>()
   private val actual = ArrayDeque<T>()
@@ -33,4 +40,72 @@ class IncreasingStack<T : Comparable<T>> : SortedStack<T> {
   override fun isEmpty() = actual.isEmpty()
 
   override fun size() = actual.size
+}
+
+class MaxHeap(val capacity: Int) : Heap {
+  private var size = 0
+  private var items = IntArray(capacity)
+
+  override fun add(element: Int) {
+    items[size] = element
+    size++
+    heapifyUp()
+  }
+
+  override fun poll(): Int {
+    if (isEmpty()) throw IllegalArgumentException()
+
+    val element = items[0]
+    items[0] = items[size - 1]
+    size--
+    heapifyDown()
+
+    return element
+  }
+
+  override fun peek(): Int {
+    if (isEmpty()) throw IllegalArgumentException()
+
+    return items[0]
+  }
+
+  fun parentOf(index: Int) = items[parentIndexOf(index)]
+
+  fun leftChildOf(index: Int) = items[leftChildIndexOf(index)]
+  fun rightChildOf(index: Int) = items[rightChildIndexOf(index)]
+  private fun parentIndexOf(index: Int) = (index - 1) / 2
+
+  private fun leftChildIndexOf(index: Int) = (index * 2) + 1
+  private fun rightChildIndexOf(index: Int) = (index * 2) + 2
+
+  private fun heapifyUp() {
+    var cursor = size - 1
+
+    while (items[cursor] > parentOf(cursor)) {
+      swap(cursor, parentIndexOf(cursor))
+      cursor = parentIndexOf(cursor)
+    }
+  }
+
+  private fun heapifyDown() {
+    var cursor = 0
+
+    while (items[cursor] < leftChildOf(cursor)) {
+      if (leftChildOf(cursor) > rightChildOf(cursor)) {
+        swap(leftChildIndexOf(cursor), cursor)
+        cursor = leftChildIndexOf(cursor)
+      } else {
+        swap(rightChildIndexOf(cursor), cursor)
+        cursor = rightChildIndexOf(cursor)
+      }
+    }
+  }
+
+  private fun swap(x: Int, y: Int) {
+    val tmp = items[x]
+    items[x] = items[y]
+    items[y] = tmp
+  }
+
+  override fun isEmpty() = size == 0
 }
