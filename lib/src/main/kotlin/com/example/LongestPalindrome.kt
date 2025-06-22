@@ -1,23 +1,42 @@
 package com.example
 
 class LongestPalindrome {
-
-  // Can be optimized scaning each letter in both directions
   fun longestPalindrome(s: String): String {
-    val palindromes = mutableMapOf<String, Int>()
+    var longestSubstring = ""
 
     for (i in 0..(s.length - 1)) {
-      for (j in (s.length) downTo i) {
-        val substring = s.substring(i, j)
-        if (isPalindrome(substring)) {
-          palindromes[substring] = substring.length
-          break
-        }
+      var currentPalindrome = checkAround(i, i, s)
+
+      if (currentPalindrome.length > longestSubstring.length) {
+        longestSubstring = currentPalindrome
+      }
+
+      currentPalindrome = checkAround(i, i+1, s)
+
+      if (currentPalindrome.length > longestSubstring.length) {
+        longestSubstring = currentPalindrome
       }
     }
 
-    val entry = palindromes.maxByOrNull { it.value }
-    return entry?.key ?: ""
+    return longestSubstring
+  }
+
+  private fun checkAround(i: Int, j: Int, s: String): String {
+    var (begin, end, maxSize, currentSize) = listOf(i, j, 0, 0)
+    var longestSubstring = ""
+
+    while (begin >= 0 && end < s.length && s[begin] == s[end]) {
+      currentSize++
+      if (currentSize > maxSize) {
+        maxSize = currentSize
+        longestSubstring = s.substring(begin, end + 1)
+      }
+
+      begin--
+      end++
+    }
+
+    return longestSubstring
   }
 
   fun isPalindrome(substring: String): Boolean {

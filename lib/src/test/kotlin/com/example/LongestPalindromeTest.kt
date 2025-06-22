@@ -6,9 +6,21 @@ import org.junit.jupiter.api.Test
 class LongestPalindromeTest {
 
   @Test
-  fun solution() {
+  fun `longestPalindrome odd length`() {
     val x = LongestPalindrome()
     assertThat(x.longestPalindrome("bananas")).isEqualTo("anana")
+  }
+
+  @Test
+  fun `longestPalindrome even length`() {
+    val x = LongestPalindrome()
+    assertThat(x.longestPalindrome("cbbd")).isEqualTo("bb")
+  }
+
+  @Test
+  fun `longestPalindrome single letter`() {
+    val x = LongestPalindrome()
+    assertThat(x.longestPalindrome("a")).isEqualTo("a")
   }
 
   @Test
