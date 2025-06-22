@@ -274,6 +274,29 @@ class Solution {
     return heap.poll()
   }
 
+  // Leetcode 56
+  fun merge(intervals: Array<IntArray>): Array<IntArray> {
+    intervals.sortBy { it[0] }
+    val merged = Array<IntArray>(intervals.size, { intArrayOf() })
+    var pointer = 0
+    merged[pointer] = intervals[0]
+
+    for (i in 1..(intervals.size - 1)) {
+      val current = intervals[i]
+
+      // If collide then merge
+      if (current[0] <= merged[pointer][1]) {
+        merged[pointer][1] = Math.max(current[1], merged[pointer][1])
+      } else {
+        pointer++
+        merged[pointer] = current
+      }
+    }
+
+    // Remove empty
+    return merged.dropLast(intervals.size - pointer - 1).toTypedArray()
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),

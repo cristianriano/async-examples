@@ -137,4 +137,25 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.findKthLargest(intArrayOf(3,2,1,5,6,4), 2)).isEqualTo(5)
   }
+
+  @Test
+  fun `merge sorted intervals`() {
+    val x = Solution()
+    assertThat(x.merge(arrayOf(intArrayOf(1, 3), intArrayOf(2, 6), intArrayOf(8, 10), intArrayOf(15, 18))))
+      .isEqualTo(arrayOf(intArrayOf(1, 6), intArrayOf(8, 10), intArrayOf(15, 18)))
+  }
+
+  @Test
+  fun `merge intervals`() {
+    val x = Solution()
+    assertThat(x.merge(arrayOf(intArrayOf(1, 4), intArrayOf(0, 4))))
+      .isEqualTo(arrayOf(intArrayOf(0, 4)))
+  }
+
+  @Test
+  fun `merge containing intervals`() {
+    val x = Solution()
+    assertThat(x.merge(arrayOf(intArrayOf(1, 4), intArrayOf(2, 3))))
+      .isEqualTo(arrayOf(intArrayOf(1, 4)))
+  }
 }
