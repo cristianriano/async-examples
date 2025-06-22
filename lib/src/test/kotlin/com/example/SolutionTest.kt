@@ -101,4 +101,28 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.findMaxAverage(intArrayOf(1,12,-5,-6,50,3), 4)).isEqualTo(12.75)
   }
+
+  @Test
+  fun `min window substring`() {
+    val x = Solution()
+    assertThat(x.minWindow("ADOBECODEBANC", "ABC")).isEqualTo("BANC")
+  }
+
+  @Test
+  fun `min window substring repeated`() {
+    val x = Solution()
+    assertThat(x.minWindow("XAXXCABX", "ABC")).isEqualTo("CAB")
+  }
+
+  @Test
+  fun `min window substring multiple`() {
+    val x = Solution()
+    assertThat(x.minWindow("AXXAAXA", "AAA")).isEqualTo("AAXA")
+  }
+
+  @Test
+  fun `min window substring not found`() {
+    val x = Solution()
+    assertThat(x.minWindow("A", "AA")).isEqualTo("")
+  }
 }

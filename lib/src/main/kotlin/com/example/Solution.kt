@@ -192,6 +192,41 @@ class Solution {
     return maxAvg
   }
 
+  fun minWindow(s: String, t: String): String {
+    val frequencies = mutableMapOf<Char, Int>()
+    t.forEach { frequencies[it] = frequencies.getOrDefault(it, 0) + 1 }
+    val observedFrequencies = t.map { it to 0 }.toMap().toMutableMap()
+
+    var j = 0
+    var i = 0
+    var substring = ""
+
+    while (i < s.length) {
+      val c = s[i]
+      if (observedFrequencies.contains(c)) {
+        observedFrequencies[c] = observedFrequencies.getValue(c) + 1
+      }
+
+      while (observedFrequencies.all { (char, frequency) -> frequency >= frequencies[char]!! }) {
+        val newSubstring = s.substring(j, i+1)
+
+        if (substring == "") substring = newSubstring
+        if (newSubstring.length < substring.length) substring = newSubstring
+
+        val c = s[j]
+        if (observedFrequencies.contains(c)) {
+          observedFrequencies[c] = observedFrequencies.getValue(c) - 1
+        }
+
+        j++
+      }
+
+      i++
+    }
+
+    return substring
+  }
+
   private data class Coordinate(val x: Int, val y: Int)
 
   companion object {
