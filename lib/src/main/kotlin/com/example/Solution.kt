@@ -413,6 +413,19 @@ class Solution {
     }
   }
 
+  // Leetcode 53: Kadane's Algorithm
+  fun maxSubArray(nums: IntArray): Int {
+    var localMax = nums[0]
+    var globalMax = nums[0]
+
+    for (i in 1..(nums.size - 1)) {
+      localMax = Math.max(nums[i], localMax + nums[i])
+      if (globalMax < localMax) globalMax = localMax
+    }
+
+    return globalMax
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),
