@@ -311,6 +311,30 @@ class Solution {
     return merged.dropLast(intervals.size - pointer - 1).toTypedArray()
   }
 
+  // Leetcode 33
+  fun searchRotatedArray(nums: IntArray, target: Int): Int {
+    var begin = 0
+    var end = nums.size - 1
+
+    while (begin <= end) {
+      val mid = begin + ((end - begin) / 2)
+
+      if (nums[mid] == target) return mid
+      // Pivot on the right
+      else if (nums[begin] <= nums[mid]) {
+        if (nums[begin] <= target && target < nums[mid]) end = mid - 1
+        else begin = mid + 1
+      }
+      // Pivot on the left
+      else {
+        if (nums[mid] < target && target <= nums[end]) begin = mid + 1
+        else end = mid - 1
+      }
+    }
+
+    return -1
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),

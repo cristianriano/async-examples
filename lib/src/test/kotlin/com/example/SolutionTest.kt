@@ -157,4 +157,16 @@ class SolutionTest {
     assertThat(x.merge(arrayOf(intArrayOf(1, 4), intArrayOf(2, 3))))
       .isEqualTo(arrayOf(intArrayOf(1, 4)))
   }
+
+  @Test
+  fun searchRotatedArray() {
+    val x = Solution()
+    assertThat(x.searchRotatedArray(intArrayOf(4,5,6,7,0,1,2), 0)).isEqualTo(4)
+  }
+
+  @Test
+  fun `searchRotatedArray not found`() {
+    val x = Solution()
+    assertThat(x.searchRotatedArray(intArrayOf(4,5,6,7,0,1,2), 3)).isEqualTo(-1)
+  }
 }
