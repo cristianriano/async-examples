@@ -183,4 +183,18 @@ class SolutionTest {
     assertThat(x.permute(intArrayOf(1)))
       .containsExactlyInAnyOrder(listOf(1))
   }
+
+  @Test
+  fun `4 queens`() {
+    val x = Solution()
+    assertThat(x.solveNQueens(4))
+      .containsExactlyInAnyOrder(listOf(".Q..","...Q","Q...","..Q."), listOf("..Q.","Q...","...Q",".Q.."))
+  }
+
+  @Test
+  fun `1 queen`() {
+    val x = Solution()
+    assertThat(x.solveNQueens(1))
+      .containsExactlyInAnyOrder(listOf("Q"))
+  }
 }

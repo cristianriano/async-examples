@@ -364,6 +364,55 @@ class Solution {
     }
   }
 
+  // Leetcode 51
+  fun solveNQueens(n: Int): List<List<String>> {
+    val solutions = mutableListOf<List<String>>()
+    backtrackQueens(solutions, n, MutableList(n) { ".".repeat(n) }, 0)
+    return solutions
+  }
+
+  private fun backtrackQueens(
+    solutions: MutableList<List<String>>,
+    n: Int,
+    currentPath: MutableList<String>,
+    row: Int
+  ) {
+    if (currentPath.all { it.contains('Q') }) {
+      solutions.add(currentPath)
+      return
+    }
+
+    for (column in 0..(n - 1)) {
+      // Check if an already existing queen would kill it (only check vertically and diagonally)
+      var valid = true
+      for (j in 0..(row - 1)) {
+        // Vertically
+        if (currentPath[j][column] == 'Q') {
+          valid = false
+          break
+        }
+        // Diagonally
+        val diff = row - j
+        if (column - diff >= 0 && currentPath[j][column - diff] == 'Q') {
+          valid = false
+          break
+        }
+        if (column + diff < n && currentPath[j][column+diff] == 'Q') {
+          valid = false
+          break
+        }
+      }
+
+      if (!valid) continue
+
+      // Make a copy
+      val newRow = ".".repeat(column) + "Q" + ".".repeat(n - column - 1)
+      val newPath = currentPath.map { it }.toMutableList()
+      newPath[row] = newRow
+      backtrackQueens(solutions, n, newPath, row+1)
+    }
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),
