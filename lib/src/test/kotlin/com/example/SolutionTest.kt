@@ -169,4 +169,18 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.searchRotatedArray(intArrayOf(4,5,6,7,0,1,2), 3)).isEqualTo(-1)
   }
+
+  @Test
+  fun permutations() {
+    val x = Solution()
+    assertThat(x.permute(intArrayOf(1,2,3)))
+      .containsExactlyInAnyOrder(listOf(1,2,3), listOf(1,3,2), listOf(2,1,3), listOf(2,3,1), listOf(3,2,1), listOf(3,1,2))
+  }
+
+  @Test
+  fun `permutations single element`() {
+    val x = Solution()
+    assertThat(x.permute(intArrayOf(1)))
+      .containsExactlyInAnyOrder(listOf(1))
+  }
 }

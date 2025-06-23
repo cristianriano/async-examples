@@ -335,6 +335,35 @@ class Solution {
     return -1
   }
 
+  // Leetcode 46
+  fun permute(nums: IntArray): List<List<Int>> {
+    val response = mutableListOf<List<Int>>()
+    backtrackPermutations(response, nums, IntArray(nums.size) { -100 }, 0)
+    return response
+  }
+
+  private fun backtrackPermutations(
+    solutions: MutableList<List<Int>>,
+    nums: IntArray,
+    currentPath: IntArray,
+    index: Int
+  ) {
+    if (!currentPath.contains(-100)) {
+      solutions.add(currentPath.toList())
+      return
+    }
+
+    val element = nums[index]
+
+    for (i in 0..(nums.size - 1)) {
+      if (currentPath[i] == -100) {
+        val potential = currentPath.copyOf()
+        potential[i] = element
+        backtrackPermutations(solutions, nums, potential, index+1)
+      }
+    }
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),
