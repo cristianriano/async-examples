@@ -426,6 +426,32 @@ class Solution {
     return globalMax
   }
 
+  // Codility Demo
+  fun minInt(A: IntArray): Int {
+    val minHeap = PriorityQueue<Int>(
+      A.size,
+      Comparator<Int> { o1, o2 -> o1 -  o2}
+    )
+
+    for (i in A) {
+      if (i > 0) {
+        minHeap.add(i)
+      }
+    }
+
+    if (minHeap.isEmpty()) return 1
+
+    var min = 1
+
+    while (!minHeap.isEmpty()) {
+      if (minHeap.peek() != min) return min
+      while (min == minHeap.peek()) minHeap.poll()
+      min++
+    }
+
+    return min
+  }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),

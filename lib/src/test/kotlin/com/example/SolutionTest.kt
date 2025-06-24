@@ -197,4 +197,10 @@ class SolutionTest {
     assertThat(x.solveNQueens(1))
       .containsExactlyInAnyOrder(listOf("Q"))
   }
+
+  @Test
+  fun `min int`() {
+    val x = Solution()
+    assertThat(x.minInt(intArrayOf(1, 3, 6, 4, 1, 2))).isEqualTo(5)
+  }
 }
