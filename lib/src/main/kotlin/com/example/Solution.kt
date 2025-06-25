@@ -452,6 +452,30 @@ class Solution {
     return min
   }
 
+  // Codility: Find lower num with max digit sum. No trailing zeros
+  fun maxDigitsSum(s: String): String {
+    var maxSum = 0
+    var response = ""
+
+    var left = s[0] - '1'
+
+    val candidate = left.toString() + "9".repeat(s.length - 1)
+    var sum = sumOfDigits(candidate)
+
+    maxSum =  sum
+    response = candidate
+
+    // Test one less
+    val oneLess = (s.toDouble() - 1).toString()
+    sum = sumOfDigits(oneLess)
+
+    if (sum > maxSum) response = oneLess
+
+    return response.trimStart { it == '0' }
+  }
+
+  private fun sumOfDigits(num: String): Int = num.sumOf { it - '0' }
+
   companion object {
     enum class Bill(val value: Double, val text: String) {
       HUNDRED(100.0, "One Hundred"),

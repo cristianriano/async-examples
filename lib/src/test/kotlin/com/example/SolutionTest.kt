@@ -203,4 +203,10 @@ class SolutionTest {
     val x = Solution()
     assertThat(x.minInt(intArrayOf(1, 3, 6, 4, 1, 2))).isEqualTo(5)
   }
+
+  @Test
+  fun `max sum of digits less than s`() {
+    val x = Solution()
+    assertThat(x.maxDigitsSum("1000")).isEqualTo("999")
+  }
 }
