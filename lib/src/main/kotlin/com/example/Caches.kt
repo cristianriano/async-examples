@@ -11,6 +11,7 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
   private var tail: Node<T> = Node(null, null)
 
   init {
+    if (capacity <= 0) throw IllegalArgumentException("Capacity must be at least 1")
     head.next = tail
     tail.prev = head
   }
@@ -18,7 +19,6 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
   override fun put(key: String, value: T) {
     if (capacity == cache.size) {
       // Remove older
-      // TODO: Handle first element?
       deleteNode(tail.prev!!.key!!)
     }
 
