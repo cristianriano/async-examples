@@ -1,14 +1,14 @@
 package com.example
 
-interface Cache<T> {
-  fun put(key: String, value: T)
-  fun get(key: String): T?
+interface Cache<K, T> {
+  fun put(key: K, value: T)
+  fun get(key: K): T?
 }
 
-class LRUCache<T>(val capacity: Int): Cache<T> {
-  private var cache = mutableMapOf<String, Node<T>>()
-  private var head: Node<T> = Node(null, null)
-  private var tail: Node<T> = Node(null, null)
+class LRUCache<K, T>(val capacity: Int): Cache<K, T> {
+  private var cache = mutableMapOf<K, Node<K, T>>()
+  private var head: Node<K, T> = Node(null, null)
+  private var tail: Node<K, T> = Node(null, null)
 
   init {
     if (capacity <= 0) throw IllegalArgumentException("Capacity must be at least 1")
@@ -16,19 +16,22 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
     tail.prev = head
   }
 
-  override fun put(key: String, value: T) {
+  override fun put(key: K, value: T) {
     if (capacity == cache.size) {
       // Remove older
       deleteNode(tail.prev!!.key!!)
     }
 
     if (cache.contains(key)) deleteNode(key)
-    val node = Node(key, value, head.next, head)
+
+    val node = Node(key, value)
+    node.prev = head
+    node.next = head.next
     moveToFront(node)
     cache.put(key, node)
   }
 
-  override fun get(key: String): T? {
+  override fun get(key: K): T? {
     val node = cache[key]
 
     if (node != null) {
@@ -38,14 +41,14 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
     return node?.value
   }
 
-  private fun deleteNode(key: String) {
+  private fun deleteNode(key: K) {
     val node = cache[key]!!
     node.prev!!.next = node.next
     node.next!!.prev = node.prev
     cache.remove(key)
   }
 
-  private fun moveToFront(node: Node<T>) {
+  private fun moveToFront(node: Node<K, T>) {
     val second = head.next!!
     head.next = node
     node.prev = head
@@ -53,7 +56,8 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
     node.next = second
   }
 
-  private data class Node<T>(val key: String?, var value: T?, var next: Node<T>?, var prev: Node<T>?) {
-    constructor(key: String?, value: T?): this(key, value, null, null)
+  private data class Node<K, T>(val key: K?, var value: T?) {
+    var prev: Node<K, T>? = null
+    var next: Node<K, T>? = null
   }
 }

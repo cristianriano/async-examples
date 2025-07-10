@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class LRUCacheTest {
 
-  private lateinit var cache: Cache<Int>
+  private lateinit var cache: Cache<String, Int>
 
   @BeforeEach
   fun setUp() {
@@ -17,8 +17,8 @@ class LRUCacheTest {
 
   @Test
   fun `capacity can't be less than or eq 0`() {
-    assertThatThrownBy { LRUCache<Int>(0) }.isInstanceOf(IllegalArgumentException::class.java)
-    assertThatThrownBy { LRUCache<Int>(-1) }.isInstanceOf(IllegalArgumentException::class.java)
+    assertThatThrownBy { LRUCache<Int, Int>(0) }.isInstanceOf(IllegalArgumentException::class.java)
+    assertThatThrownBy { LRUCache<Int, Int>(-1) }.isInstanceOf(IllegalArgumentException::class.java)
   }
 
   @Test
@@ -61,12 +61,12 @@ class LRUCacheTest {
 
   @Test
   fun `small cache size`() {
-    val smallCache = LRUCache<Int>(1)
+    val smallCache = LRUCache<Int, Int>(1)
 
-    smallCache.put("one", 1)
-    assertThat(smallCache.get("one")).isEqualTo(1)
-    smallCache.put("two", 2)
-    assertThat(smallCache.get("two")).isEqualTo(2)
-    assertThat(smallCache.get("one")).isNull()
+    smallCache.put(1, 1)
+    assertThat(smallCache.get(1)).isEqualTo(1)
+    smallCache.put(2, 2)
+    assertThat(smallCache.get(2)).isEqualTo(2)
+    assertThat(smallCache.get(1)).isNull()
   }
 }
