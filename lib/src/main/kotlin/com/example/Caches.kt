@@ -16,11 +16,41 @@ class LRUCache<T>(val capacity: Int): Cache<T> {
   }
 
   override fun put(key: String, value: T) {
-    cache.put(key, Node(key, value, null, null))
+    if (capacity == cache.size) {
+      // Remove older
+      // TODO: Handle first element?
+      deleteNode(tail.prev!!.key!!)
+    }
+
+    if (cache.contains(key)) deleteNode(key)
+    val node = Node(key, value, head.next, head)
+    moveToFront(node)
+    cache.put(key, node)
   }
 
   override fun get(key: String): T? {
-    return cache.get(key)?.value
+    val node = cache[key]
+
+    if (node != null) {
+      deleteNode(key)
+      moveToFront(node)
+    }
+    return node?.value
+  }
+
+  private fun deleteNode(key: String) {
+    val node = cache[key]!!
+    node.prev!!.next = node.next
+    node.next!!.prev = node.prev
+    cache.remove(key)
+  }
+
+  private fun moveToFront(node: Node<T>) {
+    val second = head.next!!
+    head.next = node
+    node.prev = head
+    second.prev = node
+    node.next = second
   }
 
   private data class Node<T>(val key: String?, var value: T?, var next: Node<T>?, var prev: Node<T>?) {

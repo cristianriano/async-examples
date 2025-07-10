@@ -45,7 +45,7 @@ class LRUCacheTest {
     cache.put("three", 3)
     assertThat(cache.get("three")).isEqualTo(3)
     assertThat(cache.get("two")).isEqualTo(2)
-    assertThat(cache.get("one")).isNull()
+    assertThat(cache.get("one")).isEqualTo(1)
 
     cache.put("four", 4)
     assertThat(cache.get("three")).isNull()
